@@ -1,7 +1,7 @@
 @component('mail::message')
 # Introdução
 
-O corpo da mensagem
+VAI SE FUDER ALVARO AAAAAAAAAAAAA
 
 @component('mail::button', ['url' => ''])
 Texto do Botão
