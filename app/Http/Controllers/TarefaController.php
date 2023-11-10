@@ -75,8 +75,8 @@ class TarefaController extends Controller
      */
     public function edit(Tarefa $tarefa)
     {
-        $user_id = Auth::user()->user_id;
-        
+        $user_id = Auth::user()->id;
+
         if($tarefa->user_id == $user_id){
             return view('tarefa.edit', compact('tarefa'));
         }
@@ -93,7 +93,7 @@ class TarefaController extends Controller
      */
     public function update(Request $request, Tarefa $tarefa)
     {
-        if(!$tarefa->user_id == Auth::user()->user_id){
+        if(!$tarefa->user_id == Auth::user()->id){
             return view('acesso_negado');
         }
 
@@ -113,6 +113,12 @@ class TarefaController extends Controller
      */
     public function destroy(Tarefa $tarefa)
     {
-        //
+        if(!$tarefa->user_id == Auth::user()->id){
+            return view('acesso_negado');
+        }
+
+        $tarefa = Tarefa::where('user_id','=',Auth::user()->id)->delete();
+
+        return redirect()->route('tarefa.index');
     }
 }

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"> Lista de Tarefas </div>
+                <div class="card-header"> Lista de Tarefas <a href="{{ route('tarefa.create') }}" class="float-right">Novo</a></div>
 
                 <div class="card-body">    
                     <table class="table">
@@ -14,6 +14,7 @@
                                 <th scope="col">Número da Tarefa</th>
                                 <th scope="col">Nome da Tarefa</th>
                                 <th scope="col">Data para finalização</th>
+                                <th scope="col"></th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -25,12 +26,19 @@
                                 <td>{{ $tarefa->tarefa_nome}} </td>
                                 <td>{{ date('d/m/Y',strtotime($tarefa->tarefa_data_limite_conclusao)) }}</td>
                                 <td><a href=" {{ route('tarefa.edit', $tarefa->tarefa_id) }}">Editar</a></td>
+                                <td>
+                                    <form id="form_{{ $tarefa->tarefa_id }}" method="post" action=" {{ route('tarefa.destroy', $tarefa->tarefa_id) }}">
+                                        @method('DELETE')
+                                        @csrf
+                                    </form>
+                                    <a href="#" onclick="document.getElementById('form_{{ $tarefa->tarefa_id }}').submit()">Excluir</a>
+                                </td>
                             </tr>
                         </tbody>
                         @endforeach
                       </table>
 
-                      <nav>
+                      <nav class="float-right">
                         <ul class="pagination">
                             <li class="page-item">
                                 <a class="page-link" href="{{ $tarefas->previousPageUrl() }}">Voltar</a>
