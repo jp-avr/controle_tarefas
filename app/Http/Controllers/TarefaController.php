@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TarefaInserirRequest;
+use App\Mail\NovaTarefaMail;
 use App\Models\Tarefa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class TarefaController extends Controller
 {
@@ -20,11 +22,8 @@ class TarefaController extends Controller
      */
     public function index()
     {
-        if(Auth::check() ){
-            return 'Você está logado no sistema';
-        } else{
-            return 'Você não está logado no sistema';
-        }
+        $tarefas = Tarefa::paginate(5);
+        return view('tarefa.index',compact('tarefas'));
     }
 
     /**
@@ -46,9 +45,13 @@ class TarefaController extends Controller
     public function store(TarefaInserirRequest $request)
     {
         $tarefa = Tarefa::create([
+            'user_id' => Auth::id(),
             'tarefa_nome' => $request->tarefa_nome,
             'tarefa_data_limite_conclusao' => $request->tarefa_data_limite_conclusao
         ]);
+
+        // $destinatario = Auth::user()->email;
+        // Mail::to($destinatario)->send(new NovaTarefaMail($tarefa));
 
         return redirect()->route('tarefa.show', ['tarefa' => $tarefa->tarefa_id]);
     }
@@ -61,8 +64,7 @@ class TarefaController extends Controller
      */
     public function show(Tarefa $tarefa)
     {
-        $tarefas = Tarefa::all();
-        return view('tarefa.show', compact('tarefas'));
+        return view('tarefa.show', compact('tarefa'));
     }
 
     /**

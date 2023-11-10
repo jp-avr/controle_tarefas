@@ -10,6 +10,7 @@ class Tarefa extends Model
     protected $table = 'tarefas';
 
     protected $fillable = [
+        'user_id',
         'tarefa_nome',
         'tarefa_data_limite_conclusao',
         'created_at',
@@ -19,4 +20,9 @@ class Tarefa extends Model
     protected $primaryKey = 'tarefa_id';
 
     use HasFactory;
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'user_id','user_id');
+    }
 }
