@@ -5,7 +5,20 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"> Lista de Tarefas <a href="{{ route('tarefa.create') }}" class="float-right">Novo</a></div>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-6">
+                            Lista de Tarefas
+                        </div>
+                        
+                        <div class="col-6">
+                            <div class="float-right">
+                                <a href="{{ route('tarefa.create') }}" class="mr-3">Novo</a>
+                                <a href="{{ route('tarefa.exportacao') }}">XLSX</a>
+                            </div>
+                        </div>      
+                    </div>
+                </div>
 
                 <div class="card-body">    
                     <table class="table">
@@ -19,7 +32,7 @@
                             </tr>
                         </thead>
 
-                        @foreach($tarefas as $tarefa)
+                        @forelse($tarefas as $tarefa)
                         <tbody>
                             <tr>
                                 <th scope="row"> {{ $tarefa->tarefa_id }}</th>
@@ -34,8 +47,12 @@
                                     <a href="#" onclick="document.getElementById('form_{{ $tarefa->tarefa_id }}').submit()">Excluir</a>
                                 </td>
                             </tr>
+                        @empty
+                            <tr>
+                                <td style="border: none;">Nenhuma Tarefa encontrada</td>
+                            </tr>
                         </tbody>
-                        @endforeach
+                        @endforelse
                       </table>
 
                       <nav class="float-right">

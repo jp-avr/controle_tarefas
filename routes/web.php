@@ -24,6 +24,7 @@ Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['verified']], function() {
     // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('tarefa/exportacao/', 'App\Http\Controllers\TarefaController@export')->name('tarefa.exportacao');
 
     Route::resource('tarefa','App\Http\Controllers\TarefaController');
 });
