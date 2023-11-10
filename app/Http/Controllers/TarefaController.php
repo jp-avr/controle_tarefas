@@ -45,12 +45,12 @@ class TarefaController extends Controller
      */
     public function store(TarefaInserirRequest $request)
     {
-        Tarefa::create([
+        $tarefa = Tarefa::create([
             'tarefa_nome' => $request->tarefa_nome,
             'tarefa_data_limite_conclusao' => $request->tarefa_data_limite_conclusao
         ]);
 
-        return redirect()->route('tarefa.show');
+        return redirect()->route('tarefa.show', ['tarefa' => $tarefa->tarefa_id]);
     }
 
     /**
@@ -61,7 +61,8 @@ class TarefaController extends Controller
      */
     public function show(Tarefa $tarefa)
     {
-        //
+        $tarefas = Tarefa::all();
+        return view('tarefa.show', compact('tarefas'));
     }
 
     /**
