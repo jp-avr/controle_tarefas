@@ -75,7 +75,13 @@ class TarefaController extends Controller
      */
     public function edit(Tarefa $tarefa)
     {
-        return view('tarefa.edit', compact('tarefa'));
+        $user_id = Auth::user()->user_id;
+        
+        if($tarefa->user_id == $user_id){
+            return view('tarefa.edit', compact('tarefa'));
+        }
+        
+        return view('acesso_negado');
     }
 
     /**
@@ -87,6 +93,10 @@ class TarefaController extends Controller
      */
     public function update(Request $request, Tarefa $tarefa)
     {
+        if(!$tarefa->user_id == Auth::user()->user_id){
+            return view('acesso_negado');
+        }
+
         $tarefa->update([
             'tarefa_nome' => $request->get('tarefa_nome'),
             'tarefa_data_limite_conclusao' => $request->get('tarefa_data_limite_conclusao')
