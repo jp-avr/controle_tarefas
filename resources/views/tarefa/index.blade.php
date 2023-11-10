@@ -14,7 +14,7 @@
                                 <th scope="col">Número da Tarefa</th>
                                 <th scope="col">Nome da Tarefa</th>
                                 <th scope="col">Data para finalização</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
 
@@ -24,7 +24,7 @@
                                 <th scope="row"> {{ $tarefa->tarefa_id }}</th>
                                 <td>{{ $tarefa->tarefa_nome}} </td>
                                 <td>{{ date('d/m/Y',strtotime($tarefa->tarefa_data_limite_conclusao)) }}</td>
-                                <td>@mdo</td>
+                                <td><a href=" {{ route('tarefa.edit', $tarefa->tarefa_id) }}">Editar</a></td>
                             </tr>
                         </tbody>
                         @endforeach

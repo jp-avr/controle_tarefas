@@ -22,7 +22,7 @@ class TarefaController extends Controller
      */
     public function index()
     {
-        $tarefas = Tarefa::paginate(5);
+        $tarefas = Tarefa::where('user_id','=',Auth::id())->paginate(5);
         return view('tarefa.index',compact('tarefas'));
     }
 
@@ -75,7 +75,7 @@ class TarefaController extends Controller
      */
     public function edit(Tarefa $tarefa)
     {
-        //
+        return view('tarefa.edit', compact('tarefa'));
     }
 
     /**
@@ -87,7 +87,12 @@ class TarefaController extends Controller
      */
     public function update(Request $request, Tarefa $tarefa)
     {
-        //
+        $tarefa->update([
+            'tarefa_nome' => $request->get('tarefa_nome'),
+            'tarefa_data_limite_conclusao' => $request->get('tarefa_data_limite_conclusao')
+        ]);
+
+        return redirect()->route('tarefa.index');
     }
 
     /**
