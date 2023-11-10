@@ -24,7 +24,9 @@ Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['verified']], function() {
     // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('tarefa/exportacao/', 'App\Http\Controllers\TarefaController@export')->name('tarefa.exportacao');
+    Route::get('tarefa/exportacao/xlsx', 'App\Http\Controllers\TarefaController@exportXLSX')->name('tarefa.exportacao.xlsx');
+    Route::get('tarefa/exportacao/csv', 'App\Http\Controllers\TarefaController@exportCSV')->name('tarefa.exportacao.csv');
+    Route::get('tarefa/exportacao/pdf', 'App\Http\Controllers\TarefaController@exportPDF')->name('tarefa.exportacao.pdf');
 
     Route::resource('tarefa','App\Http\Controllers\TarefaController');
 });
