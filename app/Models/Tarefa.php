@@ -7,5 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tarefa extends Model
 {
+    protected $table = 'tarefas';
+
+    protected $fillable = [
+        'tarefa_nome',
+        'tarefa_data_limite_conclusao',
+        'created_at',
+        'updated_at'
+    ];
+
+    protected $primaryKey = 'tarefa_id';
+
     use HasFactory;
 }

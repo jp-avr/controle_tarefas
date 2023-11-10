@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TarefaInserirRequest;
 use App\Models\Tarefa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +34,7 @@ class TarefaController extends Controller
      */
     public function create()
     {
-        //
+        return view('tarefa.create');
     }
 
     /**
@@ -42,9 +43,14 @@ class TarefaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TarefaInserirRequest $request)
     {
-        //
+        Tarefa::create([
+            'tarefa_nome' => $request->tarefa_nome,
+            'tarefa_data_limite_conclusao' => $request->tarefa_data_limite_conclusao
+        ]);
+
+        return redirect()->route('tarefa.show');
     }
 
     /**
