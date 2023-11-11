@@ -17,13 +17,15 @@ class UserTableSeeder extends Seeder
     {
         User::create([
             'name' => 'dev',
+            'lastname' => 'Dev',
             'email' => 'dev@dev.com',
             'password' => Hash::make(123),
             'email_verified_at' => now()
         ]);
 
         User::create([
-            'name' => 'João Pedro Dev',
+            'name' => 'João Pedro',
+            'lastname' => 'Dev',
             'email' => 'jp.avrdev@gmail.com',
             'password' => Hash::make(123),
             'email_verified_at' => now()
