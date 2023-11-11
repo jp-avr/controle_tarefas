@@ -16,7 +16,7 @@
                                 <a href="{{ route('tarefa.create') }}" class="mr-3">Novo</a>
                                 <a href="{{ route('tarefa.exportacao.xlsx') }}" class="mr-3">XLSX</a>
                                 <a href="{{ route('tarefa.exportacao.csv') }}" class="mr-3">CSV</a>
-                                <a href="{{ route('tarefa.exportacao.pdf') }}">PDF</a>
+                                <a href="{{ route('tarefa.exportacao.pdf') }}">PDF</a> {{-- target="_blank" para abrir outra página do PDF--}}
                             </div>
                         </div>      
                     </div>
